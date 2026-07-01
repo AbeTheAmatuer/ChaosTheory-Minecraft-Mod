@@ -5,6 +5,6 @@ import net.fabricmc.api.ClientModInitializer;
 public class ChaosTheoryClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
-		//comment to test setup
+		//comment to test setup 2
 	}
 }
