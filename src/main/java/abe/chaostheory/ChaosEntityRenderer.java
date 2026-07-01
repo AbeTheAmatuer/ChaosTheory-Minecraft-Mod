@@ -1,0 +1,24 @@
+package abe.chaostheory;
+
+import abe.chaostheory.client.ModEntityModelLayers;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.resources.Identifier;
+
+public class ChaosEntityRenderer extends MobRenderer<ChaosEntity, ChaosEntityRenderState, ChaosEntityModel> {
+    private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(ChaosTheory.MOD_ID, "textures/entity/mini_golem.png");
+
+    public ChaosEntityRenderer(EntityRendererProvider.Context context) {
+        super(context, new ChaosEntityModel(context.bakeLayer(ModEntityModelLayers.CHAOS_ENTITY)), 0.375f); // 0.375 shadow radius
+    }
+
+    @Override
+    public ChaosEntityRenderState createRenderState() {
+        return new ChaosEntityRenderState();
+    }
+
+    @Override
+    public Identifier getTextureLocation(ChaosEntityRenderState state) {
+        return TEXTURE;
+    }
+}

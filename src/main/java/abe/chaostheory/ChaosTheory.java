@@ -2,6 +2,7 @@ package abe.chaostheory;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.resources.Identifier;
 
 import org.slf4j.Logger;
@@ -22,6 +23,7 @@ public class ChaosTheory implements ModInitializer {
 		// Proceed with mild caution.
 
 		LOGGER.info("Hello Fabric world!");
+		EntityRenderers.register(ModEntityTypes.CHAOS_ENTITY, ChaosEntityRenderer::new);
 	}
 
 	public static Identifier id(String path) {
