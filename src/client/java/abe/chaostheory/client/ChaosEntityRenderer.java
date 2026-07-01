@@ -1,6 +1,7 @@
-package abe.chaostheory;
+package abe.chaostheory.client;
 
-import abe.chaostheory.client.ModEntityModelLayers;
+import abe.chaostheory.ChaosEntity;
+import abe.chaostheory.ChaosTheory;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.Identifier;

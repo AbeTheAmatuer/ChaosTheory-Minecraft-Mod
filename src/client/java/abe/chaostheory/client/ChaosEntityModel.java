@@ -1,4 +1,4 @@
-package abe.chaostheory;
+package abe.chaostheory.client;
 
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;

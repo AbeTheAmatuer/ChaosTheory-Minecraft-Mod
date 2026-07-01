@@ -1,6 +1,5 @@
 package abe.chaostheory.client;
 
-import abe.chaostheory.ChaosEntityModel;
 import abe.chaostheory.ChaosTheory;
 import net.fabricmc.fabric.api.client.rendering.v1.ModelLayerRegistry;
 import net.minecraft.client.model.geom.ModelLayerLocation;
