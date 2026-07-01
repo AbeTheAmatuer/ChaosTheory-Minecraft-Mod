@@ -16,7 +16,7 @@ import net.minecraft.resources.Identifier;
 
 public class ModEntityTypes {
     public static final EntityType<ChaosEntity> CHAOS_ENTITY = register(
-            "ChaosEntity",
+            "chaos_entity",
             EntityType.Builder.<ChaosEntity>of(ChaosEntity::new, MobCategory.MISC)
                     .sized(0.75f, 1.75f)
     );

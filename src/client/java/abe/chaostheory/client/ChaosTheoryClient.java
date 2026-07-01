@@ -8,6 +8,6 @@ public class ChaosTheoryClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		ModEntityModelLayers.registerModelLayers();
-		//EntityRenderers.register(ModEntityTypes.CHAOS_ENTITY, ChaosEntityRenderer::new);
+		EntityRenderers.register(ModEntityTypes.CHAOS_ENTITY, ChaosEntityRenderer::new);
 	}
 }

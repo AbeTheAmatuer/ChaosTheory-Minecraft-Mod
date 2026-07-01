@@ -6,7 +6,7 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.resources.Identifier;
 
 public class ModEntityModelLayers {
-    public static final ModelLayerLocation CHAOS_ENTITY = createMain("Chaos_Entity");
+    public static final ModelLayerLocation CHAOS_ENTITY = createMain("chaos_entity");
 
     private static ModelLayerLocation createMain(String name) {
         return new ModelLayerLocation(Identifier.fromNamespaceAndPath(ChaosTheory.MOD_ID, name), "main");
