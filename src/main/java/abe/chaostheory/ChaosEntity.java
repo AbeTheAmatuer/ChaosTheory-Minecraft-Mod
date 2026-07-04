@@ -19,9 +19,13 @@ public class ChaosEntity extends PathfinderMob {
         this(ModEntityTypes.CHAOS_ENTITY, world);
     }
 
+   // private int[] texturePoints;
+
     public ChaosEntity(EntityType<? extends ChaosEntity> entityType, Level world) {
         super(entityType, world);
+       // texturePoints = n
     }
+
 
     public static AttributeSupplier.Builder createCubeAttributes() {
         return PathfinderMob.createMobAttributes()

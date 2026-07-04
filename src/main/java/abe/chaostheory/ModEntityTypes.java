@@ -32,5 +32,6 @@ public class ModEntityTypes {
 
     public static void registerAttributes() {
         FabricDefaultAttributeRegistry.register(CHAOS_ENTITY, ChaosEntity.createCubeAttributes());
+        
     }
 }

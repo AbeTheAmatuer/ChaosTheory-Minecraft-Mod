@@ -8,25 +8,38 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.util.Mth;
 
 public class ChaosEntityModel extends EntityModel<ChaosEntityRenderState> {
     private final ModelPart head;
     private final ModelPart leftLeg;
     private final ModelPart rightLeg;
+    private final ModelPart leftArm;
+    private final ModelPart rightArm;
+
 
     public ChaosEntityModel(ModelPart root) {
         super(root);
         this.head = root.getChild(PartNames.HEAD);
         this.leftLeg = root.getChild(PartNames.LEFT_LEG);
         this.rightLeg = root.getChild(PartNames.RIGHT_LEG);
+        this.leftArm = root.getChild(PartNames.LEFT_ARM);
+        this.rightArm = root.getChild(PartNames.RIGHT_ARM);
+
     }
 
     public static LayerDefinition getTexturedModelData() {
         MeshDefinition modelData = new MeshDefinition();
         PartDefinition root = modelData.getRoot();
+
+        //int rand = (int)(Math.random() * (max - min + 1)) + min;
+
+        int var = (int)(Math.random() * 600);
+
+
         root.addOrReplaceChild(
                 PartNames.BODY,
-                CubeListBuilder.create().addBox(
+                CubeListBuilder.create().texOffs((int)(Math.random() * 600), (int)(Math.random() * 600)).addBox(
                         /* x: */ -6,
                         /* y: */ -6,
                         /* z: */ -6,
@@ -38,19 +51,48 @@ public class ChaosEntityModel extends EntityModel<ChaosEntityRenderState> {
         );
         root.addOrReplaceChild(
                 PartNames.HEAD,
-                CubeListBuilder.create().texOffs(36, 0).addBox(-3, -6, -3, 6, 6, 6),
+                CubeListBuilder.create().texOffs((int)(Math.random() * 600), (int)(Math.random() * 600)).addBox(-3, -6, -3, 6, 6, 6),
                 PartPose.offset(0, 2, 0)
         );
         root.addOrReplaceChild(
                 PartNames.LEFT_LEG,
-                CubeListBuilder.create().texOffs(48, 12).addBox(-2, 0, -2, 4, 10, 4),
+                CubeListBuilder.create().texOffs((int)(Math.random() * 600), (int)(Math.random() * 600)).addBox(-2, 0, -2, 4, 10, 4),
                 PartPose.offset(-2.5f, 14, 0)
         );
         root.addOrReplaceChild(
                 PartNames.RIGHT_LEG,
-                CubeListBuilder.create().texOffs(48, 12).addBox(-2, 0, -2, 4, 10, 4),
+                CubeListBuilder.create().texOffs((int)(Math.random() * 600), (int)(Math.random() * 600)).addBox(-2, 0, -2, 4, 10, 4),
                 PartPose.offset(2.5f, 14, 0)
         );
-        return LayerDefinition.create(modelData, 64, 32);
+        root.addOrReplaceChild(
+                PartNames.LEFT_ARM,
+                CubeListBuilder.create().texOffs((int)(Math.random() * 600), (int)(Math.random() * 600)).addBox(-2, 0, -2, 4, 10, 4),
+                PartPose.offset(8, 2, 0)
+        );
+        root.addOrReplaceChild(
+                PartNames.RIGHT_ARM,
+                CubeListBuilder.create().texOffs((int)(Math.random() * 600), (int)(Math.random() * 600)).addBox(-2, 0, -2, 4, 10, 4),
+                PartPose.offset(-8, 2, 0)
+        );
+
+        return LayerDefinition.create(modelData, 600, 600);
+    }
+
+    @Override
+    public void setupAnim(ChaosEntityRenderState state) {
+        super.setupAnim(state);
+
+        this.head.xRot = state.xRot * Mth.RAD_TO_DEG;
+        this.head.yRot = state.yRot * Mth.RAD_TO_DEG;
+        float limbSwingAmplitude = state.walkAnimationSpeed;
+        float limbSwingAnimationProgress = state.walkAnimationPos;
+
+        float leftLimbRot =  Mth.cos(limbSwingAnimationProgress * 0.2f + Mth.PI) * 1.4f * limbSwingAmplitude;
+        float rightLimbRot = Mth.cos(limbSwingAnimationProgress * 0.2f) * 1.4f * limbSwingAmplitude;
+
+        this.leftLeg.xRot = leftLimbRot;
+        this.rightLeg.xRot = rightLimbRot;
+        this.leftArm.xRot = leftLimbRot;
+        this.rightArm.xRot = rightLimbRot;
     }
 }

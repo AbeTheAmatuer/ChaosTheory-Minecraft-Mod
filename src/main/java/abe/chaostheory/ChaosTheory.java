@@ -22,6 +22,8 @@ public class ChaosTheory implements ModInitializer {
 		// Proceed with mild caution.
 
 		LOGGER.info("Hello Fabric world!");
+		ModEntityTypes.registerAttributes();
+		ModEntityTypes.registerModEntityTypes();
 	}
 
 	public static Identifier id(String path) {
