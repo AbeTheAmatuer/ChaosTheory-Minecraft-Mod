@@ -1,5 +1,6 @@
 package abe.chaostheory.client;
 
+import abe.chaostheory.ChaosEntity;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartNames;
@@ -18,6 +19,8 @@ public class ChaosEntityModel extends EntityModel<ChaosEntityRenderState> {
     private final ModelPart rightArm;
 
 
+    public static int[] points = ChaosEntity.texturePoints;
+
     public ChaosEntityModel(ModelPart root) {
         super(root);
         this.head = root.getChild(PartNames.HEAD);
@@ -25,6 +28,7 @@ public class ChaosEntityModel extends EntityModel<ChaosEntityRenderState> {
         this.rightLeg = root.getChild(PartNames.RIGHT_LEG);
         this.leftArm = root.getChild(PartNames.LEFT_ARM);
         this.rightArm = root.getChild(PartNames.RIGHT_ARM);
+        this.points = ChaosEntity.texturePoints;
 
     }
 

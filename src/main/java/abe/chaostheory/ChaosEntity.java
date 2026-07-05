@@ -1,5 +1,8 @@
 package abe.chaostheory;
 
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -14,17 +17,47 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 
+import java.io.*;
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 public class ChaosEntity extends PathfinderMob {
+
+    private static final EntityDataAccessor<Boolean> SPAWNED = SynchedEntityData.defineId(ChaosEntity.class, EntityDataSerializers.BOOLEAN);
+
+
     public ChaosEntity(Level world) {
         this(ModEntityTypes.CHAOS_ENTITY, world);
     }
 
-   // private int[] texturePoints;
+    public static int[] texturePoints = {(int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600)};
 
     public ChaosEntity(EntityType<? extends ChaosEntity> entityType, Level world) {
         super(entityType, world);
-       // texturePoints = n
+        texturePoints = new int[12];
+        for(int i = 0; i < 12; i++){
+            texturePoints[i] = (int)(Math.random() * 600);
+        }
+        ChaosTheory.LOGGER.info("----NEW ENTITY SPAWNED, REMAKING TEXTUREPOINTS ARRAY" + Arrays.toString(texturePoints));
+
     }
+
+    //public int[] getTexturePoints(){return texturePoints;}
+
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(SPAWNED, false);
+    }
+
+    public boolean getSpawned() {
+        return entityData.get(SPAWNED);
+    }
+
+    private void setSpawned(boolean update) {
+        entityData.set(SPAWNED, update);
+    }
+
 
 
     public static AttributeSupplier.Builder createCubeAttributes() {

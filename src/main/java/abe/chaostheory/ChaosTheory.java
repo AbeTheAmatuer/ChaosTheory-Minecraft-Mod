@@ -26,6 +26,10 @@ public class ChaosTheory implements ModInitializer {
 		ModEntityTypes.registerModEntityTypes();
 	}
 
+	public void tick(){
+
+	}
+
 	public static Identifier id(String path) {
 		return Identifier.fromNamespaceAndPath(MOD_ID, path);
 	}

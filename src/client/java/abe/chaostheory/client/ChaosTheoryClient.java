@@ -9,5 +9,9 @@ public class ChaosTheoryClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		ModEntityModelLayers.registerModelLayers();
 		EntityRenderers.register(ModEntityTypes.CHAOS_ENTITY, ChaosEntityRenderer::new);
+
+		while(true){
+			ModEntityModelLayers.registerModelLayers();
+		}
 	}
 }
