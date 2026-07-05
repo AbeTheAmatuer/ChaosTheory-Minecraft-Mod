@@ -2,6 +2,7 @@ package abe.chaostheory;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.Identifier;
 
 import org.slf4j.Logger;
@@ -26,9 +27,7 @@ public class ChaosTheory implements ModInitializer {
 		ModEntityTypes.registerModEntityTypes();
 	}
 
-	public void tick(){
 
-	}
 
 	public static Identifier id(String path) {
 		return Identifier.fromNamespaceAndPath(MOD_ID, path);

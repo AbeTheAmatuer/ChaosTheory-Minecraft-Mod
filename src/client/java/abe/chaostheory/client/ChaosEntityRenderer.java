@@ -22,4 +22,4 @@ public class ChaosEntityRenderer extends MobRenderer<ChaosEntity, ChaosEntityRen
     public Identifier getTextureLocation(ChaosEntityRenderState state) {
         return TEXTURE;
     }
-}///iiuhiuhpiuh
+}

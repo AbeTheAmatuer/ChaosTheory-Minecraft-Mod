@@ -58,6 +58,10 @@ public class ChaosEntity extends PathfinderMob {
         entityData.set(SPAWNED, update);
     }
 
+    @Override
+    public void onSyncedDataUpdated(EntityDataAccessor<?> data) {
+        super.onSyncedDataUpdated(data);
+    }
 
 
     public static AttributeSupplier.Builder createCubeAttributes() {
