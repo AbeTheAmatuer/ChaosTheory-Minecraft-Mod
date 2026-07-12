@@ -1,6 +1,7 @@
 package abe.chaostheory.client;
 
 import abe.chaostheory.ChaosEntity;
+import abe.chaostheory.ChaosTheory;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartNames;
@@ -42,6 +43,7 @@ public class ChaosEntityModel extends EntityModel<ChaosEntityRenderState> {
         for(int i = 0; i < 12; i++){
             texturePoints[i] = (int)(Math.random() * 600);
         }
+        ChaosTheory.LOGGER.info("FROM ENTITYMODEL: JUST GENERATED NEW TEXTUREPOINTS------------");
 
 
 

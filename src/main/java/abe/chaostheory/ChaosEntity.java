@@ -47,12 +47,15 @@ public class ChaosEntity extends PathfinderMob {
         }
 
         ChaosEntityPayload payload = new ChaosEntityPayload(new BlockPos(0, 0, 0));
-        for(ServerPlayer player: PlayerLookup.level((ServerLevel) level())){
-            ServerPlayNetworking.send(player, payload);
+
+        if (level() instanceof ServerLevel){
+            for(ServerPlayer player: PlayerLookup.level((ServerLevel) level())){
+                ServerPlayNetworking.send(player, payload);
+            }
+            ChaosTheory.LOGGER.info("PAYLOAD SENT YAYAYA");
+        }else{
+            ChaosTheory.LOGGER.info("PAYLOAD NOT SENT FUCKFUCKFUCKFUCK");
         }
-
-        ChaosTheory.LOGGER.info("----NEW ENTITY SPAWNED, REMAKING TEXTUREPOINTS ARRAY" + Arrays.toString(texturePoints));
-
     }
 
     //public int[] getTexturePoints(){return texturePoints;}
