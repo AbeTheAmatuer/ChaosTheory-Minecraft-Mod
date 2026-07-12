@@ -2,6 +2,7 @@ package abe.chaostheory;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.Identifier;
 
@@ -25,6 +26,7 @@ public class ChaosTheory implements ModInitializer {
 		LOGGER.info("Hello Fabric world!");
 		ModEntityTypes.registerAttributes();
 		ModEntityTypes.registerModEntityTypes();
+		PayloadTypeRegistry.clientboundPlay().register(ChaosEntityPayload.TYPE, ChaosEntityPayload.CODEC);
 	}
 
 

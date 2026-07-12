@@ -1,8 +1,13 @@
 package abe.chaostheory;
 
+import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -30,14 +35,22 @@ public class ChaosEntity extends PathfinderMob {
         this(ModEntityTypes.CHAOS_ENTITY, world);
     }
 
-    public static int[] texturePoints = {(int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600)};
+    public static Integer[] texturePoints = {(int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600)};
 
     public ChaosEntity(EntityType<? extends ChaosEntity> entityType, Level world) {
         super(entityType, world);
-        texturePoints = new int[12];
+
+
+        texturePoints = new Integer[12];
         for(int i = 0; i < 12; i++){
             texturePoints[i] = (int)(Math.random() * 600);
         }
+
+        ChaosEntityPayload payload = new ChaosEntityPayload(new BlockPos(0, 0, 0));
+        for(ServerPlayer player: PlayerLookup.level((ServerLevel) level())){
+            ServerPlayNetworking.send(player, payload);
+        }
+
         ChaosTheory.LOGGER.info("----NEW ENTITY SPAWNED, REMAKING TEXTUREPOINTS ARRAY" + Arrays.toString(texturePoints));
 
     }

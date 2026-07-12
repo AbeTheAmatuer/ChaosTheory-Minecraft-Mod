@@ -19,7 +19,7 @@ public class ChaosEntityModel extends EntityModel<ChaosEntityRenderState> {
     private final ModelPart rightArm;
 
 
-    public static int[] points = ChaosEntity.texturePoints;
+    public static int[] texturePoints;
 
     public ChaosEntityModel(ModelPart root) {
         super(root);
@@ -28,7 +28,7 @@ public class ChaosEntityModel extends EntityModel<ChaosEntityRenderState> {
         this.rightLeg = root.getChild(PartNames.RIGHT_LEG);
         this.leftArm = root.getChild(PartNames.LEFT_ARM);
         this.rightArm = root.getChild(PartNames.RIGHT_ARM);
-        this.points = ChaosEntity.texturePoints;
+        //this.points = ChaosEntity.texturePoints;
 
     }
 
@@ -38,12 +38,16 @@ public class ChaosEntityModel extends EntityModel<ChaosEntityRenderState> {
 
         //int rand = (int)(Math.random() * (max - min + 1)) + min;
 
-        int var = (int)(Math.random() * 600);
+        texturePoints = new int[12];
+        for(int i = 0; i < 12; i++){
+            texturePoints[i] = (int)(Math.random() * 600);
+        }
+
 
 
         root.addOrReplaceChild(
                 PartNames.BODY,
-                CubeListBuilder.create().texOffs((int)(Math.random() * 600), (int)(Math.random() * 600)).addBox(
+                CubeListBuilder.create().texOffs(texturePoints[0], texturePoints[1]).addBox(
                         /* x: */ -6,
                         /* y: */ -6,
                         /* z: */ -6,

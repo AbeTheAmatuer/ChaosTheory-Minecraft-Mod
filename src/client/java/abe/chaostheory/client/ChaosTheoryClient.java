@@ -1,7 +1,11 @@
 package abe.chaostheory.client;
 
+import abe.chaostheory.ChaosEntity;
+import abe.chaostheory.ChaosEntityPayload;
 import abe.chaostheory.ModEntityTypes;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 
 public class ChaosTheoryClient implements ClientModInitializer {
@@ -10,8 +14,15 @@ public class ChaosTheoryClient implements ClientModInitializer {
 		ModEntityModelLayers.registerModelLayers();
 		EntityRenderers.register(ModEntityTypes.CHAOS_ENTITY, ChaosEntityRenderer::new);
 
-		while(true){
-			ModEntityModelLayers.registerModelLayers();
-		}
+		ClientPlayNetworking.registerGlobalReceiver(ChaosEntityPayload.TYPE, (payload, context) -> {
+			ClientLevel level = context.client().level;
+
+			if(level == null){
+				return;
+			}
+
+			ChaosEntityModel.getTexturedModelData();
+
+		});
 	}
 }
