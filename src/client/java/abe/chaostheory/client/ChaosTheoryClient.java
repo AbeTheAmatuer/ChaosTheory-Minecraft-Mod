@@ -19,7 +19,6 @@ public class ChaosTheoryClient implements ClientModInitializer {
 		ClientPlayNetworking.registerGlobalReceiver(ChaosEntityPayload.TYPE, (payload, context) -> {
 			ClientLevel level = context.client().level;
 
-			ChaosTheory.LOGGER.info("FROM CLIENT-----PAYLOAD RECEIEVED-------");
 			//ChaosEntityModel.getTexturedModelData();
 			//ModelLayersAccessor.getLayers().add(ModEntityModelLayers.CHAOS_ENTITY);
 
