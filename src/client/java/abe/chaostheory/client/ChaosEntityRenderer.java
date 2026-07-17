@@ -14,10 +14,11 @@ public class ChaosEntityRenderer extends MobRenderer<ChaosEntity, ChaosEntityRen
     String[] TEXTURES = {"chaos_entity.png", "megatexture2.png", "me.png"};
 
     private EntityRendererProvider.Context contextCopy;
-
+    private String path;
 
     public ChaosEntityRenderer(EntityRendererProvider.Context context) {
         super(context, new ChaosEntityModel(context.bakeLayer(ModEntityModelLayers.CHAOS_ENTITY)), 0.375f); // 0.375 shadow radius
+        path = "textures/entity/" + TEXTURES[(new Random()).nextInt(3)];
         contextCopy = context;
     }
 
@@ -29,7 +30,6 @@ public class ChaosEntityRenderer extends MobRenderer<ChaosEntity, ChaosEntityRen
     @Override
     public Identifier getTextureLocation(ChaosEntityRenderState state) {
         super.model = new ChaosEntityModel(contextCopy.bakeLayer(ModEntityModelLayers.CHAOS_ENTITY));
-        //String path = "textures/entity/" + TEXTURES[(new Random()).nextInt(3)];
         return Identifier.fromNamespaceAndPath(ChaosTheory.MOD_ID, path);
     }
 }

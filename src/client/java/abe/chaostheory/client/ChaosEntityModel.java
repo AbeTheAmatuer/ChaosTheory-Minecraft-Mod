@@ -12,6 +12,8 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
 
+import java.util.Random;
+
 public class ChaosEntityModel extends EntityModel<ChaosEntityRenderState> {
     private final ModelPart head;
     private final ModelPart leftLeg;
@@ -53,7 +55,7 @@ public class ChaosEntityModel extends EntityModel<ChaosEntityRenderState> {
                         /* x: */ -6,
                         /* y: */ -6,
                         /* z: */ -6,
-                        /* width: */ 12,
+                        /* width: */ (new Random().nextInt(25)),
                         /* height: */ 12,
                         /* depth: */ 12
                 ),
