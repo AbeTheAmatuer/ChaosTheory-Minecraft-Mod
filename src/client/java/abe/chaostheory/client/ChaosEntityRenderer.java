@@ -20,7 +20,7 @@ public class ChaosEntityRenderer extends MobRenderer<ChaosEntity, ChaosEntityRen
         super(context, new ChaosEntityModel(context.bakeLayer(ModEntityModelLayers.CHAOS_ENTITY)), 0.375f); // 0.375 shadow radius
         path = "textures/entity/" + TEXTURES[(new Random()).nextInt(3)];
         contextCopy = context;
-    }
+    }//Right now ModEntityModelLayers.CHAOS_ENTITY returns the REGISTERED layer definition, I might be able to change this with the Entity state variables
 
     @Override
     public ChaosEntityRenderState createRenderState() {
@@ -28,8 +28,15 @@ public class ChaosEntityRenderer extends MobRenderer<ChaosEntity, ChaosEntityRen
     }
 
     @Override
-    public Identifier getTextureLocation(ChaosEntityRenderState state) {
+    public void extractRenderState(ChaosEntity entity, ChaosEntityRenderState state, float partialTicks) {
+        super.extractRenderState(entity, state, partialTicks);
+        state.texturePathState = entity.texturePath;
+        ModEntityModelLayers.registerModelLayers();
+    }
+
+    @Override
+    public Identifier getTextureLocation(final ChaosEntityRenderState state) {
         super.model = new ChaosEntityModel(contextCopy.bakeLayer(ModEntityModelLayers.CHAOS_ENTITY));
-        return Identifier.fromNamespaceAndPath(ChaosTheory.MOD_ID, path);
+        return Identifier.fromNamespaceAndPath(ChaosTheory.MOD_ID, state.texturePathState);
     }
 }

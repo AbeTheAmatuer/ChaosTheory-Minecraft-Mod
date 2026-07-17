@@ -25,11 +25,13 @@ import net.minecraft.world.level.Level;
 import java.io.*;
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Random;
 
 public class ChaosEntity extends PathfinderMob {
 
     private static final EntityDataAccessor<Boolean> SPAWNED = SynchedEntityData.defineId(ChaosEntity.class, EntityDataSerializers.BOOLEAN);
-
+    String[] TEXTURES = {"chaos_entity.png", "megatexture2.png", "me.png"};
+    public String texturePath;
 
     public ChaosEntity(Level world) {
         this(ModEntityTypes.CHAOS_ENTITY, world);
@@ -40,11 +42,15 @@ public class ChaosEntity extends PathfinderMob {
     public ChaosEntity(EntityType<? extends ChaosEntity> entityType, Level world) {
         super(entityType, world);
 
+        texturePath = "textures/entity/" + TEXTURES[(new Random()).nextInt(3)];
 
         texturePoints = new Integer[12];
         for(int i = 0; i < 12; i++){
             texturePoints[i] = (int)(Math.random() * 600);
         }
+
+
+        ChaosTheory.LOGGER.info("---------------randomized texture is " + texturePath);
 
         ChaosEntityPayload payload = new ChaosEntityPayload(new BlockPos(0, 0, 0));
 
@@ -52,9 +58,9 @@ public class ChaosEntity extends PathfinderMob {
             for(ServerPlayer player: PlayerLookup.level((ServerLevel) level())){
                 ServerPlayNetworking.send(player, payload);
             }
-            ChaosTheory.LOGGER.info("PAYLOAD SENT YAYAYA");
+            //ChaosTheory.LOGGER.info("PAYLOAD SENT YAYAYA");
         }else{
-            ChaosTheory.LOGGER.info("PAYLOAD NOT SENT FUCKFUCKFUCKFUCK");
+           // ChaosTheory.LOGGER.info("PAYLOAD NOT SENT FUCKFUCKFUCKFUCK");
         }
     }
 

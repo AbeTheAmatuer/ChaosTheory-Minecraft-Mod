@@ -55,7 +55,7 @@ public class ChaosEntityModel extends EntityModel<ChaosEntityRenderState> {
                         /* x: */ -6,
                         /* y: */ -6,
                         /* z: */ -6,
-                        /* width: */ (new Random().nextInt(25)),
+                        /* width: */ 12,
                         /* height: */ 12,
                         /* depth: */ 12
                 ),
