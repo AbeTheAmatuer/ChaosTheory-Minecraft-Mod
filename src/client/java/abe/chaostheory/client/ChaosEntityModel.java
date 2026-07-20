@@ -21,8 +21,7 @@ public class ChaosEntityModel extends EntityModel<ChaosEntityRenderState> {
     private final ModelPart leftArm;
     private final ModelPart rightArm;
 
-
-    public static int[] texturePoints;
+    static int[] texturePoints = new int[12];
 
     public ChaosEntityModel(ModelPart root) {
         super(root);
@@ -31,9 +30,21 @@ public class ChaosEntityModel extends EntityModel<ChaosEntityRenderState> {
         this.rightLeg = root.getChild(PartNames.RIGHT_LEG);
         this.leftArm = root.getChild(PartNames.LEFT_ARM);
         this.rightArm = root.getChild(PartNames.RIGHT_ARM);
-        //this.points = ChaosEntity.texturePoints;
+        for(int i = 0; i < 12; i++){
+            texturePoints[i] = (int)(Math.random() * 600);
+        }
 
     }
+
+   /* public ChaosEntityModel(ModelPart root, int[] points) {
+        super(root);
+        this.head = root.getChild(PartNames.HEAD);
+        this.leftLeg = root.getChild(PartNames.LEFT_LEG);
+        this.rightLeg = root.getChild(PartNames.RIGHT_LEG);
+        this.leftArm = root.getChild(PartNames.LEFT_ARM);
+        this.rightArm = root.getChild(PartNames.RIGHT_ARM);
+        this.texturePoints = points;
+    }*/
 
     public static LayerDefinition getTexturedModelData() {
         MeshDefinition modelData = new MeshDefinition();
@@ -41,17 +52,14 @@ public class ChaosEntityModel extends EntityModel<ChaosEntityRenderState> {
 
         //int rand = (int)(Math.random() * (max - min + 1)) + min;
 
-        texturePoints = new int[12];
+
         for(int i = 0; i < 12; i++){
             texturePoints[i] = (int)(Math.random() * 600);
         }
-        ChaosTheory.LOGGER.info("FROM ENTITYMODEL: JUST GENERATED NEW TEXTUREPOINTS------------");
-
-
 
         root.addOrReplaceChild(
                 PartNames.BODY,
-                CubeListBuilder.create().texOffs(texturePoints[0], texturePoints[1]).addBox(
+                CubeListBuilder.create().addBox(
                         /* x: */ -6,
                         /* y: */ -6,
                         /* z: */ -6,
@@ -63,32 +71,34 @@ public class ChaosEntityModel extends EntityModel<ChaosEntityRenderState> {
         );
         root.addOrReplaceChild(
                 PartNames.HEAD,
-                CubeListBuilder.create().texOffs((int)(Math.random() * 600), (int)(Math.random() * 600)).addBox(-3, -6, -3, 6, 6, 6),
+                CubeListBuilder.create().texOffs(36, 0).addBox(-3, -6, -3, 6, 6, 6),
                 PartPose.offset(0, 2, 0)
         );
         root.addOrReplaceChild(
                 PartNames.LEFT_LEG,
-                CubeListBuilder.create().texOffs((int)(Math.random() * 600), (int)(Math.random() * 600)).addBox(-2, 0, -2, 4, 10, 4),
+                CubeListBuilder.create().texOffs(48, 12).addBox(-2, 0, -2, 4, 10, 4),
                 PartPose.offset(-2.5f, 14, 0)
         );
         root.addOrReplaceChild(
                 PartNames.RIGHT_LEG,
-                CubeListBuilder.create().texOffs((int)(Math.random() * 600), (int)(Math.random() * 600)).addBox(-2, 0, -2, 4, 10, 4),
+                CubeListBuilder.create().texOffs(48, 12).addBox(-2, 0, -2, 4, 10, 4),
                 PartPose.offset(2.5f, 14, 0)
         );
         root.addOrReplaceChild(
                 PartNames.LEFT_ARM,
-                CubeListBuilder.create().texOffs((int)(Math.random() * 600), (int)(Math.random() * 600)).addBox(-2, 0, -2, 4, 10, 4),
+                CubeListBuilder.create().texOffs(48, 12).addBox(-2, 0, -2, 4, 10, 4),
                 PartPose.offset(8, 2, 0)
         );
         root.addOrReplaceChild(
                 PartNames.RIGHT_ARM,
-                CubeListBuilder.create().texOffs((int)(Math.random() * 600), (int)(Math.random() * 600)).addBox(-2, 0, -2, 4, 10, 4),
+                CubeListBuilder.create().texOffs(48, 12).addBox(-2, 0, -2, 4, 10, 4),
                 PartPose.offset(-8, 2, 0)
         );
-
-        return LayerDefinition.create(modelData, 600, 600);
+        return LayerDefinition.create(modelData, 64, 32);
     }
+
+
+
 
     @Override
     public void setupAnim(ChaosEntityRenderState state) {

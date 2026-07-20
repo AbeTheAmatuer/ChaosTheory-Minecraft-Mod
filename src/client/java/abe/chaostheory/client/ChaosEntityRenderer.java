@@ -2,6 +2,8 @@ package abe.chaostheory.client;
 
 import abe.chaostheory.ChaosEntity;
 import abe.chaostheory.ChaosTheory;
+import net.fabricmc.fabric.api.client.rendering.v1.ModelLayerRegistry;
+import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.Identifier;
@@ -28,10 +30,10 @@ public class ChaosEntityRenderer extends MobRenderer<ChaosEntity, ChaosEntityRen
     }
 
     @Override
-    public void extractRenderState(ChaosEntity entity, ChaosEntityRenderState state, float partialTicks) {
+    public void extractRenderState(ChaosEntity entity, final ChaosEntityRenderState state, float partialTicks) {
         super.extractRenderState(entity, state, partialTicks);
         state.texturePathState = entity.texturePath;
-        ModEntityModelLayers.registerModelLayers();
+        state.offsetPointsState = entity.texturePoints;
     }
 
     @Override
