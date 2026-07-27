@@ -42,18 +42,22 @@ public class ChaosEntity extends PathfinderMob {
 
     public int[] texturePoints = {(int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600), (int)(Math.random() * 600)};
 
+    public static int numEntities = 0;
+    private int entityID;
+
     public ChaosEntity(EntityType<? extends ChaosEntity> entityType, Level world) {
         super(entityType, world);
 
-        texturePath = "textures/entity/" + TEXTURES[(new Random()).nextInt(4)];
+        //texturePath = "textures/entity/" + TEXTURES[(new Random()).nextInt(4)];
+        entityID = numEntities;
+        texturePath = generateTexture();
+        numEntities++;
 
-        generateTexture();
 
-        /*
         texturePoints = new int[12];
         for(int i = 0; i < 12; i++){
             texturePoints[i] = (int)(Math.random() * 600);
-        }*/
+        }
 
         ChaosEntityPayload payload = new ChaosEntityPayload(new BlockPos(0, 0, 0));
 
@@ -104,9 +108,17 @@ public class ChaosEntity extends PathfinderMob {
     }
 
 
-    public void generateTexture(){
+    public String generateTexture(){
         int width = 64, height = 32;
 
+
+        Random rand = new Random();
+
+        int initial = rand.nextInt(256);
+        int offsetR = rand.nextInt(30);
+        int offsetG = rand.nextInt(30);
+        int offsetB = rand.nextInt(30);
+        int alpha = rand.nextInt(256);
         // Create buffered image object
         BufferedImage img = null;
         img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
@@ -118,11 +130,14 @@ public class ChaosEntity extends PathfinderMob {
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 // generating values less than 256
-                int a = (int) (Math.random() * 256);
-                int r = (int) (Math.random() * 256);
-                int g = (int) (Math.random() * 256);
-                int b = (int) (Math.random() * 256);
+                int a = (int) (alpha);
+                int r = (int) (initial += offsetR);
+                int g = (int) (initial * Math.abs(offsetG*Math.sin(rand.nextInt(100))));
+                int b = (int) (initial + (offsetB / (rand.nextInt(10) + 1)));
 
+                if(initial > 256){
+                    initial = rand.nextInt(256);
+                }
                 //pixel
                 int p = (a << 24) | (r << 16) | (g << 8) | b;
 
@@ -132,12 +147,15 @@ public class ChaosEntity extends PathfinderMob {
 
         // write image
         try {
-            f = new File("./randomTextures.png");
+            f = new File("resources/assets/chaostheory/textures/entity/random_texture" + entityID + ".png");
             ImageIO.write(img, "png", f);
             ChaosTheory.LOGGER.info("------- FILE CORRECTLY MADE AT " + f.getAbsolutePath());
         } catch (IOException e) {
             ChaosTheory.LOGGER.info("---------Error: " + e);
         }
+
+        return "resources/assets/chaostheory/textures/entity/random_texture" + entityID + ".png";
     }
+
 
 }
