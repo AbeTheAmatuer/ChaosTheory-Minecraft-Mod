@@ -50,7 +50,8 @@ public class ChaosEntity extends PathfinderMob {
 
         //texturePath = "textures/entity/" + TEXTURES[(new Random()).nextInt(4)];
         entityID = numEntities;
-        texturePath = generateTexture();
+        texturePath = "textures/entity/random" + (new Random()).nextInt(19) + ".png";
+        ChaosTheory.LOGGER.info("MOB ID: " + entityID + ", MOB PATH" + texturePath);
         numEntities++;
 
 
@@ -144,18 +145,17 @@ public class ChaosEntity extends PathfinderMob {
                 img.setRGB(x, y, p);
             }
         }
-
+//chaostheory-template-26.2/src/main/resources/assets/chaostheory/textures/entity/random_texture" + entityID + ".png
         // write image
         try {
-            f = new File("resources/assets/chaostheory/textures/entity/random_texture" + entityID + ".png");
+            f = new File("/Users/sirabe/Downloads/chaostheory-template-26.2/src/main/resources/assets/chaostheory/textures/entity/random" + entityID + ".png");
             ImageIO.write(img, "png", f);
             ChaosTheory.LOGGER.info("------- FILE CORRECTLY MADE AT " + f.getAbsolutePath());
         } catch (IOException e) {
-            ChaosTheory.LOGGER.info("---------Error: " + e);
+            ChaosTheory.LOGGER.warn("---------Filemake Error: " + e);
         }
 
-        return "resources/assets/chaostheory/textures/entity/random_texture" + entityID + ".png";
+        return "textures/entity/random" + entityID + ".png";
     }
-
 
 }
